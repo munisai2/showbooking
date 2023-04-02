@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Add Venue</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  </head>
+  <body class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-6">
+        <h1 class="text-center mb-4">Add Venue</h1>
+        <form method="post">
+          <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="place">Place:</label>
+            <input type="text" id="place" name="place" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="location">Location:</label>
+            <input type="text" id="location" name="location" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="capacity">Capacity:</label>
+            <input type="number" id="capacity" name="capacity" class="form-control" min="1" required>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Add Venue</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

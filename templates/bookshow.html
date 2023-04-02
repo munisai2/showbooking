@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Book Show</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+  <form action="{{ url_for('logout') }}" method="get">
+    <button type="submit" class="btn btn-secondary">Logout</button>
+  </form>
+
+  <div class="container d-flex justify-content-center">
+    <div class="col-md-6 mt-5">
+      <h2 class="text-center">{{ show[2] }}</h2>
+      <p class="text-center">{{ venue[1] }}, {{ venue[2] }}</p>
+      {% if num_available_seats == 0 %}
+        <p class="text-center text-danger">House Full!</p>
+      {% else %}
+        <p class="text-center">Available seats: {{ num_available_seats }}</p>
+        <p class="text-center">Price: ₹{{ show[6] }}</p>
+        <form method="POST">
+          <div class="form-group">
+            <label for="num_seats">Number of seats:</label>
+            <input type="number" class="form-control" name="num_seats" id="num_seats" value="{{ num_seats }}" min="1" max="{{ num_available_seats }}" required>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Book now</button>
+        </form>
+      {% endif %}
+      {% if booking_successful %}
+        <p class="text-center text-success">Booking confirmed! Enjoy the show!</p>
+      {% endif %}
+    </div>
+  </div>
+  <script>
+    // Update the total price when the number of seats is changed
+    var price = {{ price }};
+    document.getElementById('num_seats').addEventListener('input', function() {
+      var num_seats = this.value;
+      var total_price = num_seats * price;
+      document.getElementById('total_price').textContent = "₹" + total_price.toFixed(2);
+    });
+  </script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1 predisabledN1sNV6afdKJcPD7T9o" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1r ribbedfQ2EWrHN7Uo7Xw5iq2XJsTvGxhN6Ii6U8TvJh0Uod8D73" crossorigin="anonymous"></script>
+</body>

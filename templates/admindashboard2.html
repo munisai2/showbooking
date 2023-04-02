@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard 2</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        body {
+            margin: 0 auto;
+            max-width: 800px;
+            padding: 20px;
+            text-align: center;
+        }
+        table {
+            margin: 0 auto;
+            text-align: left;
+            width: 100%;
+        }
+        th, td {
+            padding: 10px;
+        }
+        th {
+            background-color: #007bff;
+            color: #fff;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+    </style>
+    <form action="{{ url_for('logout') }}" method="get">
+        <button type="submit" class="btn btn-secondary">Logout</button>
+      </form>
+</head>
+<body>
+    <h1>All Venues</h1>
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>Name</th>
+                <th>Place</th>
+                <th>Location</th>
+                <th>Capacity</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for venue in venues %}
+            <tr>
+                <td>{{ venue[1] }}</td>
+                <td>{{ venue[2] }}</td>
+                <td>{{ venue[3] }}</td>
+                <td>{{ venue[4] }}</td>
+                <td>
+                    <a href="{{ url_for('editvenue', id=venue[0]) }}">Edit</a>
+                    <a href="{{ url_for('deletevenue', id=venue[0]) }}">Delete</a>
+                    <a href="{{ url_for('createshow', id=venue[0]) }}">Add Show</a>
+                    <hr>
+                    {% for show in venue[5] %}
+                        <a href="{{ url_for('editshow', id=show[0]) }}">Edit Show</a>
+                        <a href="{{ url_for('deleteshow', id=show[0]) }}">Delete Show</a>
+                        <br>
+                        <b>Show Name:</b> {{ show[2] }}<br>
+                        <b>Timing:</b> {{ show[4] }}<br>
+                        <b>Price:</b> {{ show[6] }}<br>
+                        <hr>
+                    {% endfor %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <a href="{{ url_for('admindashboard1') }}" class="btn btn-primary">Create a New Venue</a>
+</body>
+</html>
